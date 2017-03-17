@@ -1,6 +1,7 @@
 language: node_js
 dist: trusty
 node_js: stable
+sudo: required
 
 cache:
   bundler: true
@@ -16,6 +17,9 @@ before_script:
 
 script:
   - xvfb-run testem ci --reporter dot
+  - phantomjs --webdriver=4444 &
+  - phantomjs --version
+  - gemini test
 
 deploy:
   api_key:
